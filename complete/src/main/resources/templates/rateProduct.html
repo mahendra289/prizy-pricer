@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p th:text="'Hello Worker'" />
+    <h1>Rate a Product</h1>
+    <form action="#" th:action="@{/rateProduct}" th:object="${product}" method="post">
+    	<table>
+    		<tr>
+    			<td>Store</td>
+    			<td><input type="text" th:field="*{store}"/></td>
+    		</tr>
+    		
+    		<tr>
+    			<td>Product bar code</td>
+    			<td><input type="text" th:field="*{productBarCode}" /></td>
+    		</tr>
+    		
+    		<tr>
+    			<td>Price</td>
+    			<td><input type="text" th:field="*{price}"/></td>
+    		</tr>
+    		
+    		<tr>
+    			<td>Notes</td>
+    			<td><input type="text" th:field="*{notes}"/></td>
+    		</tr>
+    		<tr>
+    		<td><input type="submit" value="Save"/></td>
+    		<td><input type="reset"/></td>
+    		</tr>
+    	
+    	</table>
+    	
+    </form>
+</body>
+</html>
