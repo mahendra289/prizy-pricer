@@ -14,31 +14,46 @@ public class PrizyController {
 	
 	@Autowired
 	PrizyRepository prizyRepository;
+	
+	@Autowired
+	ProductRepository productRepository;
 
     @RequestMapping(value="/rateProduct", method=RequestMethod.GET)
-    public String greeting(Product product, Model model) {
+    public String greeting(Model model) {
+    	
+    	ProductRates productRates = new ProductRates(new Product());
+    	model.addAttribute(productRates);
     	
         return "rateProduct";
     }
     
     @RequestMapping(value="/productListview", method=RequestMethod.GET)
     public String productListview(Model model) {
-    	model.addAttribute("products", prizyRepository.findAll());
+    	model.addAttribute("productRates", prizyRepository.findAll());
         return "productListview";
     }
     
     @RequestMapping(value="/rateProduct", method=RequestMethod.POST)
-    public String saveProduct(@ModelAttribute Product product, BindingResult bindingResult , Model model) {
+    public String saveProduct(@ModelAttribute ProductRates productRates, BindingResult bindingResult , Model model) {
     	
-    	prizyRepository.save(product);
+    	prizyRepository.save(productRates);
     	
-        model.addAttribute("store", product.getStore());
-        model.addAttribute("productBarCode", product.getProductBarCode());
-        model.addAttribute("price", product.getPrice());
-        model.addAttribute("notes", product.getNotes());
+        model.addAttribute("store", productRates.getStore());
+        model.addAttribute("productBarCode", productRates.getProduct().getProductBarCode());
+        model.addAttribute("price", productRates.getPrice());
+        model.addAttribute("notes", productRates.getNotes());
         return "productConfirm";
     }
     
+    @RequestMapping(value="/productInfo", method=RequestMethod.GET)
+    public String productInfo(Model model) {
+    	
+    	Product product = productRepository.findByProductBarCode(888);
+    	
+    	System.out.println(product.getProductRates().get(0).getNotes());
+    	
+        return "productInfo";
+    }
     
 
 }

@@ -1,44 +1,40 @@
 package hello;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Product {
 
-	private String productBarCode;
-	private String store;
-	private Integer price;
-	private String notes;
+	private  Integer productBarCode;
+	
+	private List<ProductRates> productRates;
+	
+	
+	public Product(){}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public String getProductBarCode() {
+	public Integer getProductBarCode() {
 		return productBarCode;
 	}
-	public void setProductBarCode(String productBarCode) {
+	public void setProductBarCode(Integer productBarCode) {
 		this.productBarCode = productBarCode;
 	}
-	public String getStore() {
-		return store;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	public List<ProductRates> getProductRates() {
+		return productRates;
 	}
-	public void setStore(String store) {
-		this.store = store;
+	public void setProductRates(List<ProductRates> productRates) {
+		this.productRates = productRates;
 	}
-	public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-	public String getNotes() {
-		return notes;
-	}
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+
+	
+	
 	
 	
 	

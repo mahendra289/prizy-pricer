@@ -6,13 +6,10 @@
 </head>
 <body>
     <p th:text="'Hello Admin'" />
-    <p th:each="product : ${products}" >
+    <p th:each="productRates : ${productRates}" >
 		<h4>Product Code:</h4>
-		<div th:text="${product.productBarCode}"></div>
-		<h4>Store:</h4>
-		<div th:text="${product.store}"></div>
-		<h4>Price:</h4>
-		<div th:text="${product.price}"></div>
+		<a href="/productInfo">More Info</a><div th:text="${productRates.product.productBarCode}"></div>
+		
 		<div>---------------------------------------------------------</div>
 	</p>
 </body>
